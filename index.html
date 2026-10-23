@@ -488,7 +488,7 @@
         </div>
       </div>
 
-      <form class="reveal" onsubmit="return handleSubmit(event)">
+      <form class="reveal" id="bookingForm" action="https://formspree.io/f/maeewgkb" method="POST">
         <div class="field">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
@@ -496,6 +496,10 @@
         <div class="field">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone">
         </div>
         <div class="field">
           <label for="service">I'm interested in</label>
@@ -510,8 +514,9 @@
           <label for="message">A little about you</label>
           <textarea id="message" name="message" placeholder="Your experience, goals, or anything you'd like Shweta to know…"></textarea>
         </div>
-        <button type="submit" class="btn btn-gold">Request a Booking</button>
-        <p class="form-note">This form is a starting point — connect it to your email or a booking tool before going live.</p>
+        <input type="hidden" name="_subject" value="New booking enquiry — Bloomlife Yoga">
+        <button type="submit" class="btn btn-gold" id="submitBtn">Request a Booking</button>
+        <p class="form-note" id="formNote">Your enquiry goes straight to Shweta. You'll usually hear back within a day or two.</p>
       </form>
     </div>
   </div>
@@ -566,11 +571,30 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  function handleSubmit(e) {
+  // Booking form — submits to Formspree via fetch, with inline success/error
+  const bookingForm = document.getElementById('bookingForm');
+  bookingForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    alert("Thank you! Once your email or booking tool is connected, this will send straight to Shweta. For now, please email baallasweta@gmail.com");
-    return false;
-  }
+    const btn = document.getElementById('submitBtn');
+    const note = document.getElementById('formNote');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const res = await fetch(bookingForm.action, {
+        method: 'POST',
+        body: new FormData(bookingForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('submit failed');
+      bookingForm.reset();
+      btn.style.display = 'none';
+      note.innerHTML = '✦ Thank you — your enquiry has been sent. Shweta will be in touch soon.';
+      note.style.color = 'var(--gold)';
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Request a Booking';
+      note.innerHTML = 'Sorry, something went wrong. Please email <a href="mailto:baallasweta@gmail.com" style="color:var(--gold)">baallasweta@gmail.com</a>.';
+      note.style.color = 'var(--wine-bright)';
+    }
+  });
 </script>
 
 </body>

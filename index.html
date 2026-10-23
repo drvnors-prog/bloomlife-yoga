@@ -189,6 +189,12 @@
   .service-card ul { list-style: none; }
   .service-card li { padding: 8px 0 8px 28px; position: relative; color: var(--soft); font-size: .96rem; }
   .service-card li::before { content: '✦'; position: absolute; left: 0; color: var(--wine-bright); font-size: .9rem; top: 9px; text-shadow: 0 0 10px rgba(var(--wine-rgb),0.7); }
+  .pricing { margin-top: 46px; text-align: center; position: relative; z-index: 2; }
+  .pricing-inner { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; padding: 34px clamp(30px,6vw,60px); border-radius: 20px; background: linear-gradient(160deg, var(--navy-800), var(--navy-850)); border: 1px solid rgba(var(--gold-rgb),0.35); box-shadow: 0 0 44px -14px rgba(var(--wine-rgb),0.55), inset 0 0 0 1px rgba(var(--gold-rgb),0.08); }
+  .pricing-label { text-transform: uppercase; letter-spacing: .24em; font-size: .74rem; font-weight: 500; color: var(--gold); }
+  .pricing-amount { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem,5vw,3.3rem); color: var(--text); line-height: 1; text-shadow: 0 0 30px rgba(var(--gold-rgb),0.4); }
+  .pricing-amount .pricing-unit { font-family: 'Jost', sans-serif; font-size: 1.05rem; font-weight: 300; color: var(--muted); margin-left: 8px; }
+  .pricing-note { font-size: .92rem; color: var(--soft); }
 
   /* about */
   .about { background: linear-gradient(160deg, var(--navy-950), var(--navy-850)); position: relative; overflow: hidden; }
@@ -393,6 +399,14 @@
           <li>Same personalised, evidence-based programming</li>
           <li>Flexible scheduling to suit your week</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="pricing reveal">
+      <div class="pricing-inner">
+        <span class="pricing-label">Standard Consultation</span>
+        <span class="pricing-amount">$110<span class="pricing-unit">per session</span></span>
+        <span class="pricing-note">In-home &amp; telehealth · by appointment</span>
       </div>
     </div>
   </div>

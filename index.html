@@ -213,6 +213,20 @@
   .package-total { color: var(--soft); font-size: .95rem; }
   .package-save { margin-top: 10px; font-size: .76rem; font-weight: 500; letter-spacing: .04em; color: #fff; background: linear-gradient(135deg, var(--wine), var(--wine-bright)); padding: 5px 15px; border-radius: 20px; box-shadow: 0 0 16px -4px rgba(var(--wine-rgb),.6); }
   .pricing-fineprint { text-align: center; color: var(--muted); font-size: .9rem; margin: 42px auto 0; max-width: 640px; }
+  .intake { background: linear-gradient(160deg, var(--navy-950), var(--navy-850)); overflow: hidden; }
+  .intake .orb-wine { width: 440px; height: 440px; right: -160px; top: -140px; opacity: .3; }
+  .intake-form { max-width: 820px; margin: 0 auto; }
+  .form-section-title { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 1.35rem; margin: 30px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .form-section-title.first { margin-top: 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .check-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px 22px; margin-top: 4px; }
+  .check-item, .consent-item { display: flex; align-items: flex-start; gap: 11px; font-size: .94rem; color: var(--soft); cursor: pointer; line-height: 1.5; }
+  .check-item input[type=checkbox], .consent-item input[type=checkbox] { width: 18px; height: 18px; min-width: 18px; margin-top: 3px; accent-color: var(--wine-bright); cursor: pointer; }
+  .consent-item strong { color: var(--gold); font-weight: 500; }
+  .consent-list { display: flex; flex-direction: column; gap: 15px; margin-top: 12px; padding: 24px; border-radius: 14px; background: rgba(6,11,26,0.45); border: 1px solid var(--line); }
+  .indemnity-note { font-size: .92rem; color: var(--soft); margin-top: 22px; padding: 18px 22px; border-left: 2px solid var(--gold); background: rgba(var(--gold-rgb),0.06); border-radius: 0 12px 12px 0; }
+  .indemnity-note strong { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; }
+  .form-disclaimer { font-size: .82rem; color: var(--muted); margin-top: 18px; text-align: center; }
 
   /* about */
   .about { background: linear-gradient(160deg, var(--navy-950), var(--navy-850)); position: relative; overflow: hidden; }
@@ -304,6 +318,7 @@
     .hero { padding: 160px 0 90px; }
     .trust-row { gap: 28px; }
     .packages-grid { grid-template-columns: 1fr; }
+    .form-row, .check-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -556,6 +571,7 @@
         <p class="eyebrow">Begin Your Practice</p>
         <h2>Book a session</h2>
         <p>Share a little about yourself and what you're hoping for, and Shweta will be in touch to arrange a time that suits — in-home or online.</p>
+        <p><a href="#health-form" style="color:var(--gold);">★ New clients: please complete the Medical &amp; Self-Indemnity Form before your first session →</a></p>
 
         <div class="contact-detail">
           <div class="ci"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
@@ -605,6 +621,86 @@
   </div>
 </section>
 
+<!-- MEDICAL & INDEMNITY FORM -->
+<section class="intake" id="health-form">
+  <div class="orb orb-wine"></div>
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">New Clients</p>
+      <h2>Medical &amp; Self-Indemnity Form</h2>
+      <p>Please complete this form before your first session. It helps Shweta tailor a safe, appropriate practice for you, and your information is kept strictly confidential.</p>
+    </div>
+
+    <form class="intake-form reveal" id="intakeForm" action="https://formspree.io/f/maeewgkb" method="POST">
+      <input type="hidden" name="_subject" value="Medical &amp; Indemnity Form — Bloomlife Yoga">
+      <input type="hidden" name="form_type" value="Medical & Self-Indemnity Intake">
+
+      <h3 class="form-section-title first">Your details</h3>
+      <div class="form-row">
+        <div class="field"><label for="i-name">Full name</label><input type="text" id="i-name" name="full_name" required></div>
+        <div class="field"><label for="i-dob">Date of birth</label><input type="date" id="i-dob" name="date_of_birth"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="i-phone">Phone</label><input type="tel" id="i-phone" name="phone" required></div>
+        <div class="field"><label for="i-email">Email</label><input type="email" id="i-email" name="email" required></div>
+      </div>
+      <div class="field"><label for="i-address">Residential address (for in-home sessions)</label><input type="text" id="i-address" name="address"></div>
+      <div class="form-row">
+        <div class="field"><label for="i-ec-name">Emergency contact name</label><input type="text" id="i-ec-name" name="emergency_contact_name"></div>
+        <div class="field"><label for="i-ec-phone">Emergency contact phone</label><input type="tel" id="i-ec-phone" name="emergency_contact_phone"></div>
+      </div>
+
+      <h3 class="form-section-title">Medical conditions</h3>
+      <label>Please check any that currently apply to you:</label>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="conditions" value="Heart condition"> Heart condition</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="High or low blood pressure"> High / low blood pressure</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Asthma or respiratory condition"> Asthma / respiratory condition</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Diabetes"> Diabetes</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Arthritis"> Arthritis</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Osteoporosis"> Osteoporosis</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Back or spine injury"> Back / spine injury</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Neck injury"> Neck injury</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Joint or muscle injury"> Joint / muscle injury</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Recent surgery"> Recent surgery</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Pregnancy (current or recent)"> Pregnancy (current / recent)</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Epilepsy or seizures"> Epilepsy / seizures</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Vertigo or balance issues"> Vertigo / balance issues</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Neurological condition"> Neurological condition</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="Mental health condition"> Mental health condition</label>
+        <label class="check-item"><input type="checkbox" name="conditions" value="None of the above"> None of the above</label>
+      </div>
+      <div class="field" style="margin-top:20px;"><label for="i-cond-details">Details of any conditions checked above</label><textarea id="i-cond-details" name="condition_details" placeholder="Please give any relevant detail — when, severity, current status…"></textarea></div>
+      <div class="field"><label for="i-meds">Current medications</label><textarea id="i-meds" name="medications" placeholder="List any medications you are currently taking, or write 'None'."></textarea></div>
+      <div class="field"><label for="i-therapy">Current medical care, therapy or treatment</label><textarea id="i-therapy" name="current_therapy" placeholder="Describe any therapy or treatment you are currently undergoing, or write 'None'."></textarea></div>
+
+      <h3 class="form-section-title">Acknowledgement &amp; indemnity</h3>
+      <div class="consent-list">
+        <label class="consent-item"><input type="checkbox" name="ack_accurate" value="Yes" required> I confirm that the information I have provided is true, accurate and complete to the best of my knowledge.</label>
+        <label class="consent-item"><input type="checkbox" name="ack_risks" value="Yes" required> I understand the potential <strong>risks and benefits</strong> of yoga and movement-based practice, and I participate voluntarily.</label>
+        <label class="consent-item"><input type="checkbox" name="ack_therapy" value="Yes" required> I confirm I am undertaking this practice willingly and have disclosed any therapy, treatment or medical care I am currently receiving.</label>
+        <label class="consent-item"><input type="checkbox" name="ack_doctor" value="Yes" required> I understand it is my responsibility to consult my doctor before starting, and to stop and seek help if I feel unwell during a session.</label>
+        <label class="consent-item"><input type="checkbox" name="ack_indemnity" value="Yes" required> I release and <strong>indemnify Shweta Bala and Bloomlife Yoga</strong> against any liability, claim, loss or demand for any medical or legal issue arising from my participation, to the fullest extent permitted by law.</label>
+        <label class="consent-item"><input type="checkbox" name="ack_privacy" value="Yes" required> I consent to my personal and health information being collected and kept confidential for the sole purpose of delivering safe, appropriate sessions.</label>
+      </div>
+
+      <div class="indemnity-note">
+        <strong>Practitioner indemnity.</strong> Bloomlife Yoga operates with its own professional indemnity for the practice. Shweta Bala is a certified yoga instructor and support therapist, and all sessions are delivered with due care and within her scope of practice.
+      </div>
+
+      <h3 class="form-section-title">Signature</h3>
+      <div class="form-row">
+        <div class="field"><label for="i-sign">Signed (type your full name)</label><input type="text" id="i-sign" name="signature" required></div>
+        <div class="field"><label for="i-date">Date</label><input type="date" id="i-date" name="date_signed" required></div>
+      </div>
+
+      <button type="submit" class="btn btn-gold" id="intakeBtn">Submit Form</button>
+      <p class="form-note" id="intakeNote">Your details are sent securely to Shweta and treated as confidential.</p>
+      <p class="form-disclaimer">This form is for health-screening and record purposes and does not replace professional medical advice.</p>
+    </form>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -624,6 +720,7 @@
         <a href="#about">About Shweta</a>
         <a href="#reach">Who It's For</a>
         <a href="#contact">Book a Session</a>
+        <a href="#health-form">Medical Form</a>
       </div>
       <div class="footer-col">
         <h5>Reach</h5>
@@ -679,6 +776,33 @@
       note.style.color = 'var(--wine-bright)';
     }
   });
+
+  // Medical & indemnity form — submits to Formspree
+  const intakeForm = document.getElementById('intakeForm');
+  if (intakeForm) {
+    intakeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('intakeBtn');
+      const note = document.getElementById('intakeNote');
+      btn.disabled = true; btn.textContent = 'Submitting…';
+      try {
+        const res = await fetch(intakeForm.action, {
+          method: 'POST',
+          body: new FormData(intakeForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('submit failed');
+        intakeForm.reset();
+        btn.style.display = 'none';
+        note.innerHTML = '✦ Thank you — your form has been received. Shweta will review it before your session.';
+        note.style.color = 'var(--gold)';
+      } catch (err) {
+        btn.disabled = false; btn.textContent = 'Submit Form';
+        note.innerHTML = 'Sorry, something went wrong. Please email <a href="mailto:baallasweta@gmail.com" style="color:var(--gold)">baallasweta@gmail.com</a>.';
+        note.style.color = 'var(--wine-bright)';
+      }
+    });
+  }
 </script>
 
 </body>
